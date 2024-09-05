@@ -48,38 +48,38 @@ const stopwatch_minutes = document.querySelector('.stopwatch__minutes');
 const stopwatch_hours = document.querySelector('.stopwatch__hours');
 const startBtn = document.querySelector('.stopwatch__btn');
 const span = document.querySelector('.tabsLink__span');
-let seconds = 0;
-let timer = 0;
-let minutes = 0;
-let hours = 0;
+let st_seconds = 0;
+let timer = null;
+let st_minutes = 0;
+let st_hours = 0;
 
 function addSeconds() {
-    seconds += 1;
-    if (seconds > 59) {
-        seconds = 0;
-        minutes += 1;
-        stopwatch_minutes.innerHTML = minutes;
-        stopwatch_seconds.innerHTML = seconds;
+    st_seconds += 1;
+    if (st_seconds > 59) {
+        st_seconds = 0;
+        st_minutes += 1;
+        stopwatch_minutes.innerHTML = st_minutes;
+        stopwatch_seconds.innerHTML = st_seconds;
     } else {
-        stopwatch_seconds.innerHTML = seconds;
+        stopwatch_seconds.innerHTML = st_seconds;
     }
 
-    if (minutes > 59) {
-        minutes = 0;
-        hours += 1;
-        stopwatch_hours.innerHTML = hours;
-        stopwatch_minutes.innerHTML = minutes;
+    if (st_minutes > 59) {
+        st_minutes = 0;
+        st_hours += 1;
+        stopwatch_hours.innerHTML = st_hours;
+        stopwatch_minutes.innerHTML = st_minutes;
     }
 }
 
 function handleStartAndStop() {
-    if (timer === 0) {
+    if (timer === null) {
         timer = setInterval(addSeconds, 1000);
         startBtn.innerHTML = 'stop';
         span.classList.add('active');
     } else {
         clearInterval(timer);
-        timer = 0;
+        timer = null;
         startBtn.innerHTML = 'clear';
         span.classList.remove('active');
         span.classList.add('active_clear');
@@ -89,13 +89,13 @@ function handleStartAndStop() {
 function handleClear() {
     if (startBtn.innerHTML === 'clear') {
         clearInterval(timer);
-        timer = 0;
-        seconds = 0;
-        minutes = 0;
-        hours = 0;
-        stopwatch_seconds.innerHTML = seconds;
-        stopwatch_minutes.innerHTML = minutes;
-        stopwatch_hours.innerHTML = hours;
+        timer = null;
+        st_seconds = 0;
+        st_minutes = 0;
+        st_hours = 0;
+        stopwatch_seconds.innerHTML = st_seconds;
+        stopwatch_minutes.innerHTML = st_minutes;
+        stopwatch_hours.innerHTML = st_hours;
         startBtn.innerHTML = 'start';
         span.classList.remove('active_clear');
     }
@@ -112,3 +112,4 @@ function start() {
 }
 
 start();
+console.log(st_seconds)
