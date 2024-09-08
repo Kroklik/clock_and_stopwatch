@@ -86,9 +86,12 @@ function start() {
         } else if (startBtn.innerHTML === 'clear') {
             clearInterval(timer)
             startBtn.innerHTML = 'start'
-            st_seconds = 0;
-            st_minutes = 0;
-            st_hours = 0;
+            st_seconds = 0
+            st_minutes = 0
+            st_hours = 0
+            stopwatch_minutes.innerHTML = st_minutes;
+            stopwatch_seconds.innerHTML = st_seconds;
+            stopwatch_hours.innerHTML = st_hours;
             span.classList.remove('active_clear')
         }
     })
