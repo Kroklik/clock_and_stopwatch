@@ -49,9 +49,9 @@ const stopwatch_hours = document.querySelector('.stopwatch__hours');
 const startBtn = document.querySelector('.stopwatch__btn');
 const span = document.querySelector('.tabsLink__span');
 let st_seconds = 0;
-let timer = null;
 let st_minutes = 0;
 let st_hours = 0;
+let timer = null;
 
 function addSeconds() {
     st_seconds += 1;
@@ -72,44 +72,28 @@ function addSeconds() {
     }
 }
 
-function handleStartAndStop() {
-    if (timer === null) {
-        timer = setInterval(addSeconds, 1000);
-        startBtn.innerHTML = 'stop';
-        span.classList.add('active');
-    } else {
-        clearInterval(timer);
-        timer = null;
-        startBtn.innerHTML = 'clear';
-        span.classList.remove('active');
-        span.classList.add('active_clear');
-    }
-}
-
-function handleClear() {
-    if (startBtn.innerHTML === 'clear') {
-        clearInterval(timer);
-        timer = null;
-        st_seconds = 0;
-        st_minutes = 0;
-        st_hours = 0;
-        stopwatch_seconds.innerHTML = st_seconds;
-        stopwatch_minutes.innerHTML = st_minutes;
-        stopwatch_hours.innerHTML = st_hours;
-        startBtn.innerHTML = 'start';
-        span.classList.remove('active_clear');
-    }
-}
-
 function start() {
     startBtn.addEventListener('click', () => {
-        if (startBtn.innerHTML === 'start' || startBtn.innerHTML === 'stop') {
-            handleStartAndStop();
+        if (startBtn.innerHTML === 'start') {
+            timer = setInterval(addSeconds, 1000)
+            startBtn.innerHTML = 'stop'
+            span.classList.add('active')
+        } else if (startBtn.innerHTML === 'stop') {
+            clearInterval(timer)
+            startBtn.innerHTML = 'clear'
+            span.classList.remove('active')
+            span.classList.add('active_clear')
         } else if (startBtn.innerHTML === 'clear') {
-            handleClear();
+            clearInterval(timer)
+            startBtn.innerHTML = 'start'
+            st_seconds = 0;
+            st_minutes = 0;
+            st_hours = 0;
+            span.classList.remove('active_clear')
         }
-    });
+    })
 }
 
-start();
-console.log(st_seconds)
+start()
+
+
